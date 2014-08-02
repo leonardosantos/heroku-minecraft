@@ -21,57 +21,35 @@ Since Heroku is a bit of a weird platform, there are a couple of caveats to runn
    ```
    heroku create my-app-name --buildpack https://github.com/ddollar/heroku-buildpack-multi.git
    ```
-   
-3. Enable the [Heroku Labs WebSockets feature](https://devcenter.heroku.com/articles/heroku-labs-websockets).
+
+3. Choose your minecraft server version (default: 1.7.10).
 
    ```
-   heroku labs:enable websockets
+   heroku config:add MC_VERSION=1.7.10
    ```
-   
+
 4. Add your Amazon AWS credentials and S3 bucket name to the Heroku configuration. This enables data persistence. Otherwise, your server will be wiped each time it is restarted.
 
    ```
    heroku config:add AWS_KEY=xxxxxxx AWS_SECRET=yyyyyyyyyyyyyyyyy S3_BUCKET=my-bucket-name
    ```
-   
+
 5. Push the app to Heroku.
 
    ```
    git push heroku master
    ```
-   
+
 ## Client Setup
 
-Hopefully, this process can be streamlined in the future, but for now it's a little squirrely if you aren't a developer.
+Use https://github.com/leonardosantos/hmwtc, then
 
-These instructions are for OS X, or some other Linux-like operating system maybe.
-
-1. Clone this repository using git (or, if it's easier, [GitHub for Mac](http://mac.github.com), or [GitHub for Windows](http://windows.github.com)).
-
-2. Install [NodeJS](http://nodejs.org) and [NPM](https://npmjs.org). On the Mac, I suggest doing this via [Homebrew](http://brew.sh). If you have Homebrew installed, just do `brew install node`.
-
-3. Change to the repository you cloned.
-
-   ```
-   cd ~/Downloads-Or-Wherever/heroku-minecraft
-   ```
-   
-4. Install the NPM dependencies.
-
-   ```
-   npm install
-   ```
-   
-5. Run the proxy service. This will proxy the Minecraft server on Heroku to your local machine. The server will appear to be a Minecraft server running on your local machine.
-
-   ```
-   coffee proxy/connect.coffee my-app-name.herokuapp.com
-   ```
-   
-6. **Leave the terminal window open** and launch Minecraft. Add a new server with the address `localhost`. Hit connect and play! When you're done playing, close the terminal window.
+  ```
+  hmwtc my-app-name.herokuapp.com
+  ```
 
 ## Credits
 
-Much of the original Heroku setup by [Jacob Gillespie](https://github.com/jacobwg). 
+Much of the original Heroku setup by [Jacob Gillespie](https://github.com/jacobwg).
 
 Updates, refactoring, and the WebSockets proxying by [Wil Gieseler](https://github.com/wilg).

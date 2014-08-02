@@ -16,5 +16,13 @@ ruby bin/sync.rb init
 touch server.log
 nice tail -f server.log &
 
+# Default minecraft version
+if [ -z "$MC_VERSION" ]; then
+    export MC_VERSION=1.7.10
+fi
+
+# downloading minecraft
+curl -o vendor/minecraft_server.${MC_VERSION}.jar https://s3.amazonaws.com/Minecraft.Download/versions/${MC_VERSION}/minecraft_server.${MC_VERSION}.jar
+
 # run minecraft
-java -Xmx1024M -Xms1024M -jar vendor/minecraft_server.1.7.10.jar nogui
+java -Xmx1024M -Xms1024M -jar vendor/minecraft_server.${MC_VERSION}.jar nogui
